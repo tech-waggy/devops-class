@@ -17,14 +17,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Commit and push to gh-pages
-        run: |
-          mkdir public
-          cp index.html public/
-          cd public
-          git init
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git branch -M gh-pages
-          git remote add origin https://github.com/${{ github.repository }}
-          git push --force origin gh-pages
+
+      - name: Copiar archivos al branch gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./  # raíz del proyecto
+
